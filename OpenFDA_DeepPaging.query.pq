@@ -6,7 +6,8 @@ let
     GetAll = List.Generate(
         () =>
             OpenFDA_DeepPaging.Contents(
-                SourceUrl, "device/510k.json?search=openfda.regulation_number:868.5895&limit=100"
+                SourceUrl, 
+                "device/510k.json?search=openfda.regulation_number:868.5895&limit=100"
             ),
         each _ <> null,
         each
