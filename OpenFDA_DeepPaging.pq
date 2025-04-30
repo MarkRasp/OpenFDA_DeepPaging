@@ -5,9 +5,9 @@ section OpenFDA_DeepPaging;
 [DataSource.Kind = "OpenFDA_DeepPaging", Publish = "OpenFDA_DeepPaging.Publish"]
 shared OpenFDA_DeepPaging.Contents =
     let
-        func = (baseURL as text, optional relativePath as text) as record =>
+        func = (baseURL as text, optional endpointAndQuery as text) as record =>
             let
-                Source = Web.Contents(baseURL, [RelativePath = relativePath]),
+                Source = Web.Contents(baseURL, [RelativePath = endpointAndQuery]),
                 Headers = Value.Metadata(Source)[Headers],
                 Results = Table.FromRecords(Json.Document(Source)[results], null, MissingField.UseNull),
                 Return = [Headers = Headers, Results = Results]
@@ -15,7 +15,7 @@ shared OpenFDA_DeepPaging.Contents =
                 Return
     in
         Value.ReplaceType(
-            func, type function (baseURL as text, optional relativePath as text) as [
+            func, type function (baseURL as text, optional endpointAndQuery as text) as [
                 Headers = record, Results = table
             ]
         );
