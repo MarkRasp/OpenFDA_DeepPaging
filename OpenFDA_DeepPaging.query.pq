@@ -11,7 +11,7 @@ let
             ),
         each _ <> null,
         each
-            if[Headers][Link]? = null then
+            if [Headers][Link]? = null then
                 null
             else
                 let
